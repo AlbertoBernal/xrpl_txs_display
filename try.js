@@ -1,8 +1,10 @@
 //import * from './xrpl-latest-min.js';
 
-temp_disp = document.body.querySelector("#temperatureDisplay");
+account_filter = document.body.querySelector("#accountInput");
+currency_filter = document.body.querySelector("#currencyInput");
 transactionArea_textarea = document.body.querySelector('#transactionArea-textarea');
 checkbox = document.body.querySelector("#myCheckbox");
+disconect_btn = document.body.querySelector('#disconectButton');
 
 transactionArea_textarea.addEventListener('input', () => {
     console.log("input event fired");
@@ -12,7 +14,8 @@ transactionArea_textarea.addEventListener('input', () => {
 });
 
 
-console.assert (temp_disp != undefined, "can't find temp displauy");
+console.assert (currency_filter != undefined, "can't find currency input");
+console.assert (account_filter != undefined, "cant't find account filter input");
 
 
 //const worker = new Worker('/home/alberto/temp_worker.js');
@@ -35,13 +38,32 @@ console.assert (temp_disp != undefined, "can't find temp displauy");
 
 //     //messagesDiv.innerHTML += `<p>${message}</p>`;
 // };
+let g_connected=false;
 
-// document.getElementById('sendButton').addEventListener('click', () => {
-//     const messageInput = document.getElementById('messageInput');
-//     const message = messageInput.value;
-//     ws.send(message);
-//     messageInput.value = '';
-// });
+const update_connection_status = (connected, dom_button) => {
+    if (connected){
+	dom_button.textContent = "Disconnect";
+    }else{
+	dom_button.textContent = "Connect";
+    }
+    g_connected = connected;
+}
+
+disconect_btn.addEventListener('click',async () => {
+
+    if (g_connected === true){
+	console.log ("button disconect");
+	await client.disconnect();
+	await client2.disconnect();
+	update_connection_status (false, disconect_btn);
+    } else {
+	console.log ("button connect");
+	main();
+	//await client.connect();
+	//await client2.connect();
+	//update_connection_status (true, disconect_btn);
+    }
+});
 
 // let temp_query_interval = setInterval (() =>
 // 				       {
@@ -59,8 +81,9 @@ const client = new xrpl.Client("wss://s1.ripple.com/")
 const client2 = new xrpl.Client("wss://s2.ripple.com/")
 
 async function main() {
-    await client.connect()
-    await client2.connect()
+    await client.connect();
+    await client2.connect();
+    update_connection_status (true, disconect_btn);
     // ... custom code goes here
     client.request({
 	"command": "subscribe",
