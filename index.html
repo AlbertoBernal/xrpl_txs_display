@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Webpage</title>
+</head>
+<body>
+<div class="container">
+  <div id="enclosed"> 
+    <p>
+      <input type="text" id="temperatureDisplay" placeholder="No temperature data"> Celsius Degrees
+    </p>
+    <p>
+      <input type="text" id="messageInput"> Request
+    </p>
+    <p>
+      <button id="sendButton">Send</button>
+    </p>
+  </div>
+  
+  <div id="transactionArea">
+    <div class="checkboxAndLabel">
+      <input type="checkbox" class="round" id="myCheckbox" name="myGroup" value="option1"></input>
+      <label for="round">Auto-Scroll</label>
+    </div>
+    <textarea id="transactionArea-textarea" value="">
+    </textarea>
+  </div>
+</div>
+<script src=/home/alberto/xrpl-latest-min.js> </script>
+<script src=/home/alberto/try.js> </script>
+  
+<style>
+  * {
+      font-family: 'mono';
+      font-size: 10px;
+  }
+  .checkboxAndLabel {
+      display: flex;
+      padding: 5px;
+  }
+  .round:checked {
+      background-color: lightgreen;
+
+  }
+
+  .round:focus {
+      border-color: rgb(80, 67, 250);
+  }
+
+  .round:disabled {
+      background-color: rgb(198, 198, 198);
+      background-image: none;
+  }
+
+  .round {
+      background-color: #fff;
+      appearance: none;
+      /* Disable default style of checkbox */
+      border: 2px solid #888;
+      transition: background-color 0.3s ease-in-out;
+      border-radius: 50%;
+      cursor: pointer;
+      height: 14px;
+      width: 14px;
+      margin: 5px;
+  }
+  .checkboxAndLabel label {
+      padding-top: 7px;
+      /* must be .round height/2 */
+      text-align: center;
+  }
+  
+  body { background-color: beige;}
+    .container {
+	display: flex;
+	padding-left:10px;
+	padding-right: 10px;
+    }
+    #enclosed {
+	border-width:2px;
+	background-color: rgb(12,90,200);
+	padding : 5px;
+	width: 20%;
+	border-radius: 10px;
+    }
+    #transactionArea{
+	border-width:2px;
+	background-color: lightgreen;
+	padding : 5px;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	border-radius: 10px;
+    }
+    input {
+	background-color: beige;
+    }
+    textarea {	
+	border-width:2px;
+	background-color: lightgreen;
+	padding : 5px;
+	border-radius: 10px;
+	font-family: 'Arial';
+	font-wight: bold;
+	font-size: 13px;
+	justify-content: center;
+	width: 100%;
+	height: 900px;;
+	color: purple;
+	padding:0px;
+    }
+  </style>
+</body>
+</html>
